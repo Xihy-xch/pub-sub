@@ -7,16 +7,10 @@
 using namespace std;
 
 int main() {
-  char buf[1024];
-  memset(buf,'\0', 1024);
-  buf[0] = '1';
-  buf[1] = '2';
-  string buf1 = buf;
-  int i = 0;
-  while (buf[i] != '\0') {
-    cout << buf1[i] << endl;
-    i++;
-  }
+
+  char* buf = "0wer";
+  std::string topicName = std::string(buf).substr(1);
+  cout << topicName << endl;
 
   return 0;
 }

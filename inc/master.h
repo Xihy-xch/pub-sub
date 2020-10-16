@@ -1,13 +1,13 @@
 #ifndef MASTER_H
 #define MASTER_H
 
-#include "node.h"
+#include "common.h"
 
 class Master {
  public:
   void init(char* ip, int port);
   void run();
-  void parseInfo(std::string buf, int sockfd);
+  void parseInfo(char* buf, int socket);
 
  public:
   int masterSocket;
@@ -16,6 +16,7 @@ class Master {
 
   int usablePort;
   std::map<std::string, int> pubList;
+  std::map<std::string, std::vector<int>> subList;
 };
 
 #endif

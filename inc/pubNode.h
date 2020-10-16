@@ -7,15 +7,13 @@
 
 class PubNode {
  public:
-  PubNode(char* ip, int port);
   PubNode();
   //void init();
   void setPub(std::string topic);
   void publish(std::string& msg);
   
 
- public:
-  
+ public:  
   char* ip;
   int port;
 };
