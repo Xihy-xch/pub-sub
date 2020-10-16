@@ -3,7 +3,6 @@
 
 #include "common.h"
 #include "subNode.h"
-;
 
 class PubNode {
  public:

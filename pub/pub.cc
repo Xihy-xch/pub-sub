@@ -1,11 +1,7 @@
-#include "node.h"
+#include "pubNode.h"
 
 int main() {
-  Node pubNode;
+  PubNode pubNode;
   pubNode.setPub("talker");
-  std::string msg = "hello world";
-  while (1) {
-    pubNode.publish(msg);
-    sleep(2);
-  }
+  return 0;
 }

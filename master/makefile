@@ -3,7 +3,7 @@ inc = ../inc
 cc = clang++
 CFLAGS = -std=c++11
 
-object = ${obj}/common.o ${obj}/master.o ${obj}/node.o masternode.o
+object = ${obj}/common.o ${obj}/master.o ${obj}/subnode.o masternode.o
 target = masternode
 
 ${target}:${object}
