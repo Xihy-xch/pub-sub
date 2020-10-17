@@ -5,11 +5,11 @@
 
 class SubNode {
  public:
-  SubNode(char* ip, int port);
-  SubNode();
+  // SubNode(char* ip, int port);
+  // SubNode();
   //void init();
   void setSub(std::string topic);
-  void getMsg();
+  // void getMsg();
   
 
  public:

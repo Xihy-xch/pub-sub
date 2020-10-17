@@ -25,6 +25,8 @@ void setServerSocket(int& socket, struct sockaddr_in& address);
 int setNoBlocking(int fd);
 
 void addfd(int epollfd, int fd);
+
+void addwfd(int epollfd, int fd);
   
 
 #endif

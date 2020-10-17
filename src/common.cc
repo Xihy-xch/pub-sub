@@ -38,3 +38,11 @@ void addfd(int epollfd, int fd) {
   epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
   setNoBlocking(fd);
 }
+
+void addwfd(int epollfd, int fd) {
+  epoll_event event;
+  event.data.fd = fd;
+  event.events = EPOLLOUT | EPOLLET;
+  epoll_ctl(epollfd, EPOLL_CTL_ADD, fd, &event);
+  setNoBlocking(fd);
+}

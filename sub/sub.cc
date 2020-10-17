@@ -1,7 +1,7 @@
-#include "node.h"
+#include "subNode.h"
 
 int main() {
-    Node subNode;
+    SubNode subNode;
     subNode.setSub("talker");
-    subNode.getMsg();
+    // subNode.getMsg();
 }

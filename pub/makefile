@@ -1,7 +1,7 @@
 obj = ../obj
 inc = ../inc
 src = ../src
-cc = clang++
+cc = g++
 CFLAGS = -std=c++11
 
 object = ${obj}/common.o  ${obj}/pubNode.o pub.o

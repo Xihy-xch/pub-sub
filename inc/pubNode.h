@@ -9,11 +9,12 @@ class PubNode {
   //PubNode();
   //void init();
   void setPub(std::string topic);
-  void publish(std::string& msg);
+  void publish(std::string msg);
   
 
  public:  
   char* ip;
   int port;
+  std::string message;
 };
 #endif

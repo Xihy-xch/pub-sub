@@ -1,0 +1,2 @@
+
+  cout << sizeof(msg) << endl;

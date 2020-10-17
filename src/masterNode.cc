@@ -3,8 +3,6 @@
 void Master::init(char* ip, int port) {
 
   this->masterSocket = socket(AF_INET, SOCK_STREAM, 0);
-  int on = 1;
-  setsockopt(this->masterSocket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
   struct sockaddr_in address;
   bzero(&address, sizeof(address));
 
@@ -23,7 +21,7 @@ void Master::run() {
     if (readyFds == -1) {
       std::cout << "epoll_wait error" << std::endl;
       serverStop = true;
-      break;
+      continue;
     }
 
     for (int i = 0; i < readyFds; i++) {
@@ -59,6 +57,13 @@ void Master::parseInfo(char* buf, int socket) {
     int type = buf[0] - '0';
 
     if (type == SUB) {
+      std::string topicName = std::string(buf).substr(1);
+      if (pubList.find(topicName) != pubList.end()) {
+        std::string msg = "port:" + std::to_string(pubList[topicName]);
+        send(socket, msg.c_str(), sizeof(msg), 0);
+      } else {
+        subList[topicName].push_back(socket);
+      }
 
     } else if (type == PUB) {
         std::string topicName = std::string(buf).substr(1);
@@ -69,9 +74,15 @@ void Master::parseInfo(char* buf, int socket) {
             return;
         }
 
-        std::cout << topicName << std::endl;
+        // std::cout << topicName << std::endl;
         this->pubList.insert(std::make_pair(topicName, usablePort));
         std::string msg = "port:" + std::to_string(usablePort);
         send(socket, msg.c_str(), sizeof(msg), 0);
+        if (subList.find(topicName) != subList.end()) {
+          for (int i = 0; i < subList[topicName].size(); i++) {
+            send(subList[topicName][i], msg.c_str(), sizeof(msg), 0);
+          }
+          subList.erase(topicName);
+        }
     }
 }

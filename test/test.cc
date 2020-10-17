@@ -8,9 +8,9 @@ using namespace std;
 
 int main() {
 
-  char* buf = "0wer";
-  std::string topicName = std::string(buf).substr(1);
-  cout << topicName << endl;
+  string msg = "123456789";
+  cout << msg.size() << endl;
+  cout << sizeof(msg) << endl;
 
   return 0;
 }
