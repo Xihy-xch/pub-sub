@@ -6,7 +6,7 @@
 
 class PubNode {
  public:
-  PubNode();
+  //PubNode();
   //void init();
   void setPub(std::string topic);
   void publish(std::string& msg);
