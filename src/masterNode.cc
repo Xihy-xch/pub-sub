@@ -1,4 +1,4 @@
-#include "master.h"
+#include "masterNode.h"
 
 void Master::init(char* ip, int port) {
 

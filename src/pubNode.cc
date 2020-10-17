@@ -2,7 +2,9 @@
 
 // PubNode::PubNode() {}
 
-void PubNode::setPub(std::string topic) {
+void PubNode::setPubTopic(std::string topic) { this->topic = topic; }
+
+void PubNode::setPub() {
   int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
   struct sockaddr_in serverAddress;
   setSocAddress(HOST_IP, MASTER_PORT, serverAddress);
@@ -12,7 +14,7 @@ void PubNode::setPub(std::string topic) {
                   sizeof(serverAddress));
   }
 
-  std::string msg = std::to_string(PUB) + topic;
+  std::string msg = std::to_string(PUB) + this->topic;
 
   ret = send(clientSocket, msg.c_str(), msg.size(), 0);
 
@@ -56,18 +58,35 @@ void PubNode::setPub(std::string topic) {
         int clientSocket =
             accept(serverSocket, (struct sockaddr*)&clientAddress,
                    &clientAddressLength);
-        addwfd(epollfd, clientSocket);
-      } else if (events[i].events & EPOLLOUT) {
-        std::string msg = "hello";
-        // if (message.size() != 0) {
-        ret = send(readySokcet, msg.c_str(), msg.size(), 0);
-        if (ret == -1) {
-          std::cout << "send error" << std::endl;
-        }
-        // }
+        subList.push_back(clientSocket);
+        // addwfd(epollfd, clientSocket);
       }
+      //  else if (events[i].events & EPOLLOUT) {
+      //   // std::string msg = "hello";
+      //   std::cout << "11" << std::endl;
+      //   if (this->message.size() != 0) {
+      //     ret =
+      //         send(readySokcet, this->message.c_str(), this->message.size(),
+      //         0);
+      //     if (ret == -1) {
+      //       std::cout << "send error" << std::endl;
+      //     }
+      //     this->message = "";
+      //   }
+      // }
     }
   }
 }
 
-void PubNode::publish(std::string msg) { this->message = msg; }
+void PubNode::publish(std::string msg) { 
+  this->message = msg; 
+  
+  for (int i = 0; i < subList.size(); i++) {
+
+    int ret = send(subList[i], msg.c_str(), msg.size(), 0);
+    if (ret == -1) {
+      std::cout << "send error" << std::endl;
+    }
+  }
+  
+  }

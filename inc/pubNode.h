@@ -4,17 +4,19 @@
 #include "common.h"
 #include "subNode.h"
 
+
 class PubNode {
  public:
   //PubNode();
   //void init();
-  void setPub(std::string topic);
+  void setPubTopic(std::string topic);
+  void setPub();
   void publish(std::string msg);
   
 
  public:  
-  char* ip;
-  int port;
   std::string message;
+  std::string topic;
+  std::vector<int> subList;
 };
 #endif
