@@ -1,7 +1,6 @@
 #include "pubNode.h"
 #include "pubThread.h"
 int main() {
-  
   PubNode pubNode;
   pubNode.setPubTopic("talker");
   startThread(&pubNode);
